@@ -1,6 +1,7 @@
 openai>=1.0.0
 httpx
 flask
+aiohttp
 python-telegram-bot>=20.0
 schedule
 pandas
