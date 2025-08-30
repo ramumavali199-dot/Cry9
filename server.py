@@ -1,6 +1,7 @@
 from flask import Flask
 import threading
-import main  # import main.py directly (no src folder)
+import asyncio
+import main  # import main.py directly
 
 app = Flask(__name__)
 
@@ -10,7 +11,10 @@ def home():
 
 def run_bot():
     if hasattr(main, "main"):
-        main.main()
+        if asyncio.iscoroutinefunction(main.main):
+            asyncio.run(main.main())   # async main
+        else:
+            main.main()                # normal main
     else:
         import importlib
         importlib.reload(main)
